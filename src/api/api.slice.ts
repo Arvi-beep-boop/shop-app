@@ -6,7 +6,7 @@ import { Category } from "../types/Category";
 // Define a service using a base URL and expected endpoints
 export const storeApi = createApi({
   reducerPath: "storeApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001/api/v1/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://fake-api-backend-1m0w.onrender.com/api/v1/" }),
   endpoints: (builder) => ({
     getProducts: builder.query<Product[], ProductQueryParams>({
       query: (params) => ({
