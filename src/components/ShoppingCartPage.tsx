@@ -1,11 +1,10 @@
-import { Button, Card, Col, Divider, Layout, Row, Typography } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { Button, Card, Layout, Typography } from "antd";
+import { useSelector } from "react-redux";
 import {
   selectShoppingCartItems,
   selectTotalPriceShoppingCart,
 } from "../store/shoppingCart.selectors";
 import { useNavigate } from "react-router";
-import Column from "antd/es/table/Column";
 import { ListProductInCart } from "./ListProductInCart";
 import { PriceSummary } from "./PriceSummary";
 import { shippingPrice } from "../constants";
@@ -14,7 +13,7 @@ import { LeftOutlined } from "@ant-design/icons";
 import { BackButton } from "./BackButton";
 import { OrderSteps } from "./OrderSteps";
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 export function ShoppingCartPage() {
   const totalPrice = useSelector(selectTotalPriceShoppingCart);

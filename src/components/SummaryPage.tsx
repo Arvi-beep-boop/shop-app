@@ -5,7 +5,6 @@ import {
   Descriptions,
   DescriptionsProps,
   Layout,
-  Steps,
   Typography,
 } from "antd";
 import { ListProductInCart } from "./ListProductInCart";
@@ -21,7 +20,7 @@ import { OrderSteps } from "./OrderSteps";
 import { StoreHeader } from "./StoreHeader";
 import { BackButton } from "./BackButton";
 import { useNavigate } from "react-router";
-const { Header, Footer, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 export function SummaryPage() {
   const shippingData = useSelector(selectShippingData);

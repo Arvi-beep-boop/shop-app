@@ -1,4 +1,4 @@
-import { Card, Col, Divider, Flex, Row, Typography } from "antd";
+import { Card, Divider, Flex, Row, Typography } from "antd";
 
 export function PriceSummary({ totalPrice, shippingPrice, button }) {
   return (

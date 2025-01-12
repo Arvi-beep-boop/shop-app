@@ -1,4 +1,4 @@
-import { Button, Card, ConfigProvider, Typography } from "antd";
+import { Button, Card, Typography } from "antd";
 import { Product } from "../types/Product";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";

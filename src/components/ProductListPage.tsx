@@ -1,18 +1,13 @@
 import "../App.css";
 import logo from "../assets/logo.png";
-import React, { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Button,
-  Divider,
-  Col,
-  Row,
   Flex,
   Layout,
-  Card,
   Input,
   Dropdown,
   Space,
-  message,
   Alert,
   Spin,
 } from "antd";
@@ -30,10 +25,8 @@ import { ProductCard } from "./ProductCard";
 import { Link, useNavigate } from "react-router";
 import { ProductQueryParams } from "../types/ProductQueryParams";
 import { StoreHeader } from "./StoreHeader";
-import Typography from "antd/es/typography/Typography";
-const { Meta } = Card;
 const { Search } = Input;
-const { Header, Footer, Sider, Content } = Layout;
+const { Footer, Sider, Content } = Layout;
 
 type SearchProps = GetProps<typeof Input.Search>;
 
@@ -81,7 +74,6 @@ export function ProductListPage() {
     order: order as ProductQueryParams["order"],
   });
 
-  console.log(error);
   const navigate = useNavigate();
 
   return (

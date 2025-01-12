@@ -1,20 +1,12 @@
-import React, { useState } from "react";
-import type { CascaderProps } from "antd";
 import {
   Alert,
-  AutoComplete,
   Button,
   Card,
-  Cascader,
   Checkbox,
-  Col,
   Form,
   Input,
-  InputNumber,
   Layout,
-  Row,
   Select,
-  Steps,
   Typography,
 } from "antd";
 import { useNavigate } from "react-router";
@@ -27,7 +19,7 @@ import { BackButton } from "./BackButton";
 import { selectShippingData } from "../store/orderForm.selectors";
 import { selectShoppingCartItems } from "../store/shoppingCart.selectors";
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Content } = Layout;
 
 const { Option } = Select;
 
@@ -85,7 +77,7 @@ export function OrderPage() {
             <>
               <OrderSteps currentStep={1} />
               <Typography.Title>Shipping Data</Typography.Title>
-              <OrderForm onClick={() => navigate("/")} />
+              <OrderForm onClick={() => navigate("/cart/order/summary")} />
             </>
           )}
         </Content>
