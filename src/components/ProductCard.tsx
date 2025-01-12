@@ -1,4 +1,4 @@
-import { Button, Card, ConfigProvider } from "antd";
+import { Button, Card, ConfigProvider, Typography } from "antd";
 import { Product } from "../types/Product";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,14 +35,18 @@ export function ProductCard({ product }: ProductCardProps) {
       hoverable
       style={{ width: 320 }}
       cover={<img src={product.images[isHovering ? 1 : 0]} />}
+      actions={[
+        <Button
+          variant="solid"
+          color={isInCart ? "green" : undefined}
+          onClick={handleShoppingCartButtonClick}
+          icon={<ShoppingCartOutlined />}
+        >
+          {isInCart ? "Remove from" : "Add to"} the shopping cart
+        </Button>,
+      ]}
     >
-      <Card.Meta title={product.title} description={`$${product.price}`} />
-      <Button
-        variant="solid"
-        color={isInCart ? "green" : undefined}
-        onClick={handleShoppingCartButtonClick}
-        icon={<ShoppingCartOutlined />}
-      ></Button>
+      <Card.Meta title={product.title} description={<Typography>{`$${product.price}`}</Typography>} />
     </Card>
   );
 }

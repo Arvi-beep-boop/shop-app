@@ -1,0 +1,1 @@
+export const shippingPrice = 5.99

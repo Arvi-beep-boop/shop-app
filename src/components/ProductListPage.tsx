@@ -1,4 +1,5 @@
 import "../App.css";
+import logo from "../assets/logo.png";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   Button,
@@ -12,6 +13,8 @@ import {
   Dropdown,
   Space,
   message,
+  Alert,
+  Spin,
 } from "antd";
 import {
   DownOutlined,
@@ -26,6 +29,8 @@ import { CurrentCategory } from "./CurrentCategory";
 import { ProductCard } from "./ProductCard";
 import { Link, useNavigate } from "react-router";
 import { ProductQueryParams } from "../types/ProductQueryParams";
+import { StoreHeader } from "./StoreHeader";
+import Typography from "antd/es/typography/Typography";
 const { Meta } = Card;
 const { Search } = Input;
 const { Header, Footer, Sider, Content } = Layout;
@@ -49,29 +54,10 @@ export function ProductListPage() {
   const [search, setSearch] = useState<string>("");
   const [category, setCategory] = useState<number | undefined>();
   const [selectedSort, setSelectedSort] = useState<string | undefined>();
-  // const handleSort = (key: string) => {
-  //   switch (key) {
-  //     case "3": // Price: Low-High
-  //       SetProducts((prevProducts) =>
-  //         [...prevProducts].sort((a, b) => a.price - b.price)
-  //       );
-  //       break;
-  //     case "4": // Price: High-Low
-  //       SetProducts((prevProducts) =>
-  //         [...prevProducts].sort((a, b) => b.price - a.price)
-  //       );
-  //       break;
-  //     default:
-  //       // Optionally handle other cases, e.g., "Featured" or "New"
-  //       break;
-  //   }
-  // };
 
   const handleMenuClick: MenuProps["onClick"] = (e) => {
-    message.info("Click on menu item.");
     console.log("click", e);
     setSelectedSort(e.key);
-    // handleSort(e.key);
   };
 
   const menuProps = {
@@ -88,37 +74,37 @@ export function ProductListPage() {
     () => selectedSort?.split("-") || [],
     [selectedSort]
   );
-  const { data: products } = storeApi.useGetProductsQuery({
+  const { data: products, error, isFetching } = storeApi.useGetProductsQuery({
     title: search,
     categoryId: category,
     order_by: order_by,
     order: order as ProductQueryParams["order"],
   });
 
+  console.log(error);
   const navigate = useNavigate();
 
   return (
     <>
       <Layout>
-        <Header>
-          <Flex
-            justify="space-between"
-            align="center"
-            rootClassName="padding-normal"
-          >
-            <Search
-              placeholder="input search text"
-              onSearch={onSearch}
-              enterButton
-            />
-            <Button
-              ghost
-              color="primary"
-              icon={<ShoppingCartOutlined />}
-              onClick={() => navigate("/cart")}
-            ></Button>
-          </Flex>
-        </Header>
+        <StoreHeader>
+          <img src={logo} height={40} />
+          <Search
+            size="large"
+            placeholder="Search"
+            onSearch={onSearch}
+            enterButton
+            style={{
+              marginLeft: "70px",
+            }}
+          />
+          <Button
+            size="large"
+            color="primary"
+            icon={<ShoppingCartOutlined />}
+            onClick={() => navigate("/cart")}
+          ></Button>
+        </StoreHeader>
         <Layout>
           <Sider theme="light">
             <CategoryList onSelect={setCategory} />
@@ -140,16 +126,22 @@ export function ProductListPage() {
               </Dropdown>
               <div>Product Count: {products?.length}</div>
             </Flex>
-            <Flex
-              wrap
-              gap="large"
-              rootClassName="padding-normal"
-              justify="center"
-            >
-              {products?.map((product) => {
-                return <ProductCard product={product}></ProductCard>;
-              })}
-            </Flex>
+            {error ? (
+              <Alert message="Something went wrong" type="error" />
+            ) : (
+              <Spin spinning={isFetching}>
+                <Flex
+                  wrap
+                  gap="large"
+                  rootClassName="padding-normal"
+                  justify="center"
+                >
+                  {products?.map((product) => {
+                    return <ProductCard product={product}></ProductCard>;
+                  })}
+                </Flex>
+              </Spin>
+            )}
           </Content>
         </Layout>
         <Footer>footer</Footer>
