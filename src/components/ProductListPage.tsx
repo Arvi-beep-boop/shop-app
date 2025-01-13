@@ -136,7 +136,6 @@ export function ProductListPage() {
             )}
           </Content>
         </Layout>
-        <Footer>footer</Footer>
       </Layout>
     </>
   );
